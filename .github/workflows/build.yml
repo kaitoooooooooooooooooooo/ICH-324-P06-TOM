@@ -1,0 +1,25 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupération du code source
+        uses: actions/checkout@v5
+
+      - name: Installation de Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 26
+
+      - name: Installation des dépendances
+        run: npm ci
+
+      - name: Exécution des tests
+        run: npm test
