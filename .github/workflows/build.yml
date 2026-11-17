@@ -23,3 +23,12 @@ jobs:
 
       - name: Exécution des tests
         run: npm test
+
+      - name: Publication de l'artefact
+        uses: actions/upload-artifact@v5
+        with:
+          name: build-artifact
+          path: |
+            index.js
+            package.json
+            junit.xml
