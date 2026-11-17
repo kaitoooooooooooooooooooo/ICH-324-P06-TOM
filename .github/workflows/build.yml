@@ -5,6 +5,12 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  issues: read
+  checks: write
+  pull-requests: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,6 +29,12 @@ jobs:
 
       - name: Exécution des tests
         run: npm test
+
+      - name: Publication des résultats de tests
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: junit.xml
 
       - name: Publication de l'artefact
         uses: actions/upload-artifact@v5
